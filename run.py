@@ -18,4 +18,15 @@ while True:
 NUM_SHIPS = 3
 SCORES = {"player": 0, "computer": 0}
 
+class Board:
+    """
+    Represents a Battleship game board.
+    
+    """
+
+    def __init__(self, size=BOARD_SIZE):
+        """Initialize the board with a given size and empty grid."""
+        self.size = size
+        self.grid = [["~"] * size for _ in range(size)]
+        self.ships = []
 
