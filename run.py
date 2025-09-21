@@ -59,4 +59,49 @@ class Board:
                     display_row.append(cell)
             print(str(idx) + " " + " ".join(display_row))
 
+    def all_ships_sunk(self):
+        """Return True if all ships on this board have been sunk, otherwise False."""
+        return all(self.grid[i][j] != "@" for i, j in self.ships)
+
+    def attack(self, x, y, players):
+        """
+        Process an attack at the given coordinates.
+
+        Args:
+            x (int): Row coordinate.
+            y (int): Column coordinate.
+
+        Returns:
+            str: "hit" if a ship is hit, "miss" if water is hit, "repeat" if already attacked.
+        """
+        if self.grid[x][y] == "@":
+            self.grid[x][y] = "X"
+            SCORES[players] += 1
+            return "hit"
+        elif self.grid[x][y] == "~":
+            self.grid[x][y] = "O"
+            return "miss"
+        else:
+            return "repeat"
+
+
+
+
+class BattleshipGame:
+    """
+    Represents a Battleship game between a player and the computer.
+
+    Attributes:
+        player_board (Board): The board containing the player's ships.
+        computer_board (Board): The board containing the computer's ships.
+        turns (int): The number of turns taken in the game.
+    """
+    def __init__(self):
+        """Initialize the game with two boards and place ships for both player and computer."""
+        self.player_board = Board()
+        self.computer_board = Board()
+        self.turns = 0
+
+        self.player_board.place_ships(NUM_SHIPS)
+        self.computer_board.place_ships(NUM_SHIPS)
 
