@@ -21,7 +21,7 @@ SCORES = {"player": 0, "computer": 0}
 class Board:
     """
     Represents a Battleship game board.
-    
+
     """
 
     def __init__(self, size=BOARD_SIZE):
@@ -29,4 +29,16 @@ class Board:
         self.size = size
         self.grid = [["~"] * size for _ in range(size)]
         self.ships = []
+        
+ def place_ships(self, num_ships=NUM_SHIPS):
+        """
+        Randomly place a specified number of ships on the board.
+        Ships are represented by "@" on the grid.
+        """
+        while len(self.ships) < num_ships:
+            x = random.randint(0, self.size - 1)
+            y = random.randint(0, self.size - 1)
+            if self.grid[x][y] == "~":
+                self.grid[x][y] = "@"
+                self.ships.append((x, y))
 
