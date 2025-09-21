@@ -29,8 +29,8 @@ class Board:
         self.size = size
         self.grid = [["~"] * size for _ in range(size)]
         self.ships = []
-        
- def place_ships(self, num_ships=NUM_SHIPS):
+
+    def place_ships(self, num_ships=NUM_SHIPS):
         """
         Randomly place a specified number of ships on the board.
         Ships are represented by "@" on the grid.
@@ -41,4 +41,22 @@ class Board:
             if self.grid[x][y] == "~":
                 self.grid[x][y] = "@"
                 self.ships.append((x, y))
+
+    def print_board(self, hide_ships=False):
+        """
+        Print the board to the console.
+
+        Args:
+            hide_ships (bool): If True, hides ships ("@") when displaying the board.
+        """
+        print("  " + " ".join(str(i) for i in range(self.size)))
+        for idx, row in enumerate(self.grid):
+            display_row = []
+            for cell in row:
+                if hide_ships and cell == "@":
+                    display_row.append("~")
+                else:
+                    display_row.append(cell)
+            print(str(idx) + " " + " ".join(display_row))
+
 
