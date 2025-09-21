@@ -97,11 +97,29 @@ class BattleshipGame:
         turns (int): The number of turns taken in the game.
     """
     def __init__(self):
-        """Initialize the game with two boards and place ships for both player and computer."""
+        """
+            Initialize three instances, self.player_board and self.computer_board calling function Board.
+            They create two boards and place ships for both player and computer. And one more instance 
+            self.turns = 0 to reset the number of turns taken in the game.
+        """
         self.player_board = Board()
         self.computer_board = Board()
         self.turns = 0
 
         self.player_board.place_ships(NUM_SHIPS)
         self.computer_board.place_ships(NUM_SHIPS)
+        
+    def score(self):
+        """
+        Return f'string type with the update Player vs Computer score. 
+        """
+        return f"PLAYER SCORE {SCORES['player']}         COMPUTER SCORE {SCORES['computer']}"
+    
 
+
+
+
+
+
+
+game = BattleshipGame()
