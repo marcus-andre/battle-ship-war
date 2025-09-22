@@ -196,8 +196,11 @@ class BattleshipGame:
                 print(
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
                 print("-----------------------------------------------------")
-
-            break
+            # Ask if player wants to continue
+            continuar = input("\nDo you want to continue? (s/n): ").lower()
+            if continuar == 'n':
+                print("You chose to quit the game. Goodbye!")
+                break
 
 
 game = BattleshipGame()
