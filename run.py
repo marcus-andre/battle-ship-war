@@ -108,7 +108,7 @@ class BattleshipGame:
 
         self.player_board.place_ships(NUM_SHIPS)
         self.computer_board.place_ships(NUM_SHIPS)
-        
+
     def score(self):
         """
         Return f'string type with the update Player vs Computer score. 
@@ -116,6 +116,30 @@ class BattleshipGame:
         return f"PLAYER SCORE {SCORES['player']}         COMPUTER SCORE {SCORES['computer']}"
     
 
+    def get_player_move(self):
+        """
+        Prompt the player to enter attack coordinates.
+
+        Returns:
+            tuple[int, int]: A valid (row, column) coordinate entered by the player.
+        """
+        while True:
+            try:
+                x = int(input(f"Enter row (0-{BOARD_SIZE - 1}): "))
+                
+                y = int(input(f"Enter column (0-{BOARD_SIZE - 1}): "))
+                if 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE:
+                    return x, y
+                else:
+                    print("Coordinates out of bounds. Try again.")
+            except ValueError:
+                print("Invalid input. Please enter numbers.")
+
+def play(self):
+        """
+        Start and run the game loop until either the player or computer wins,
+        or until the game ends in a draw or the player quits.
+        """
 
 
 
@@ -123,3 +147,4 @@ class BattleshipGame:
 
 
 game = BattleshipGame()
+game.play()
