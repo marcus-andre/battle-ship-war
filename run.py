@@ -159,12 +159,11 @@ class BattleshipGame:
             self.enemy_board.print_board(hide_ships=True)
 
             # Player's turn
-
             print("\n\033[32mYour turn to attack!\033[0m")
-
             # Call the method of the class BattleshipGame and return a tuple(x,y) with the coordinates given by the player
             x, y = self.get_player_move()
             result = self.enemy_board.attack(x, y, "player")
+
             if result == "hit":
                 print("-----------------------------------------------------")
                 print(f"You Hit computer's ship at {({x}, {y})}")
@@ -178,6 +177,26 @@ class BattleshipGame:
                 print("-----------------------------------------------------")
             else:
                 print("You have already tried this position.")
+
+            # Computer's(Enemy) turn
+            print("\n\033[34mEnemy's turn!\033[0m")
+            # Randomly choose the coordinates for the enemy by calling the methedo randint() from random library.
+            cx = random.randint(0, BOARD_SIZE - 1)
+            cy = random.randint(0, BOARD_SIZE - 1)
+            enemy_result = self.player_board.attack(cx, cy, "enemy")
+
+            if result == "hit":
+                print(f"The Enemy hits your ship at ({cx},{cy})!")
+                print("-----------------------------------------------------")
+                if self.player_board.all_ships_sunk():
+                    print("The Enemy sank all your ships! You lose!")
+                    print("-----------------------------------------------------")
+                    break
+            elif result == "miss":
+                print(
+                    f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
+                print("-----------------------------------------------------")
+
             break
 
 
