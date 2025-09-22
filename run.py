@@ -1,23 +1,27 @@
-#import module "random" from python library. This module provides functions to generate random numbers.
+# import module "random" from python library. This module provides functions to generate random numbers.
 import random
 
 
 while True:
-    BOARD_SIZE = int(input("\nChose the \033[31mSIZE\033[0m of the board from \033[31m5-10\033[0m: "))
+    BOARD_SIZE = int(
+        input("\nChose the \033[31mSIZE\033[0m of the board from \033[31m5-10\033[0m: "))
     if 5 <= BOARD_SIZE <= 10:
         print("\n---------------------------------------")
-        print(f"The \033[31mSIZE\033[0m of the Board is \033[31m{BOARD_SIZE}\033[0m:")
+        print(
+            f"The \033[31mSIZE\033[0m of the Board is \033[31m{BOARD_SIZE}\033[0m:")
         print("---------------------------------------")
         break
     else:
         print("---------------------------------------")
-        print("The \033[31mSIZE\033[0m of the board should be from \033[31m5-10\033[0m:")
+        print(
+            "The \033[31mSIZE\033[0m of the board should be from \033[31m5-10\033[0m:")
         print("---------------------------------------")
 
 
 NUM_SHIPS = 3
 
 SCORES = {"player": 0, "enemy": 0}
+
 
 class Board:
     """
@@ -89,8 +93,6 @@ class Board:
             return "repeat"
 
 
-
-
 class BattleshipGame:
     """
     Represents a Battleship game between a player and the computer(Enemy).
@@ -100,12 +102,13 @@ class BattleshipGame:
         enemy_board (Board): The board containing the enemy's ships.
         turns (int): The number of turns taken in the game.
     """
+
     def __init__(self):
         """
             Initialize three instances. The instances self.player_board
             and self.enemy create each one, new instances of Board class.
-            Board class create two boards and place ships for both player 
-            and enemy. And one more instance self.turns = 0 to reset the 
+            Board class create two boards and place ships for both player
+            and enemy. And one more instance self.turns = 0 to reset the
             number of turns taken in the game.
         """
         self.player_board = Board()
@@ -117,10 +120,9 @@ class BattleshipGame:
 
     def score(self):
         """
-        Return f'string type with the update Player vs Enemy score. 
+        Return f'string type with the update Player vs Enemy score.
         """
         return f"\033[32mPLAYER SCORE:\033[0m {SCORES['player']}         \033[34mENEMY SCORE:\033[0m {SCORES['enemy']}"
-    
 
     def get_player_move(self):
         """
@@ -132,7 +134,7 @@ class BattleshipGame:
         while True:
             try:
                 x = int(input(f"Enter row (0-{BOARD_SIZE - 1}): "))
-                
+
                 y = int(input(f"Enter column (0-{BOARD_SIZE - 1}): "))
                 if 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE:
                     return x, y
@@ -150,11 +152,32 @@ class BattleshipGame:
         print(f"{self.score()}\n")
 
         while True:
-            print("\n\033[32mYour Board (showing your ships(@) and enemy's attacks(x)): \033[0m")
+            print(
+                "\n\033[32mYour Board (showing your ships(@) and enemy's attacks(x)): \033[0m")
             self.player_board.print_board(hide_ships=False)
             print("\n\033[34mEnemy's board (showing your attacks only):\033[0m")
             self.enemy_board.print_board(hide_ships=True)
-            def teste():print("oi")
+
+            # Player's turn
+
+            print("\n\033[32mYour turn to attack!\033[0m")
+
+            # Call the method of the class BattleshipGame and return a tuple(x,y) with the coordinates given by the player
+            x, y = self.get_player_move()
+            result = self.enemy_board.attack(x, y, "player")
+            if result == "hit":
+                print("-----------------------------------------------------")
+                print(f"You Hit computer's ship at {({x}, {y})}")
+                if self.enemy_board.all_ships_sunk():
+                    print("-----------------------------------------------------")
+                    print("You sank all the computer's ships! You win!")
+                    break
+            elif result == "miss":
+                print("-----------------------------------------------------")
+                print(f"You MISS computer's ship at the coordinate ({x},{y}).")
+                print("-----------------------------------------------------")
+            else:
+                print("You have already tried this position.")
             break
 
 
