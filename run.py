@@ -3,19 +3,17 @@ import random
 
 
 while True:
+    print("\n-----------------------------------------x-----------------------------------------x-----------------------------------------x--------------------------------------")
     BOARD_SIZE = int(
-        input("\nChose the \033[31mSIZE\033[0m of the board from \033[31m5-10\033[0m: "))
+        input("\nChose SIZE of the board (5-10)"))
+
     if 5 <= BOARD_SIZE <= 10:
-        print("\n---------------------------------------")
         print(
-            f"The \033[31mSIZE\033[0m of the Board is \033[31m{BOARD_SIZE}\033[0m:")
-        print("---------------------------------------")
+            f"The SIZE of the Board is -> {BOARD_SIZE}")
         break
     else:
-        print("---------------------------------------")
         print(
-            "The \033[31mSIZE\033[0m of the board should be from \033[31m5-10\033[0m:")
-        print("---------------------------------------")
+            "The SIZE of the board should be from: 5-10")
 
 
 NUM_SHIPS = 3
@@ -122,7 +120,7 @@ class BattleshipGame:
         """
         Return f'string type with the update Player vs Enemy score.
         """
-        return f"\033[32mPLAYER SCORE:\033[0m {SCORES['player']}         \033[34mENEMY SCORE:\033[0m {SCORES['enemy']}"
+        return f"PLAYER SCORE: {SCORES['player']}         ENEMY SCORE: {SCORES['enemy']}"
 
     def get_player_move(self):
         """
@@ -148,38 +146,38 @@ class BattleshipGame:
         Start and run the game loop until either the player or computer(enemy) wins,
         or until the game ends in a draw or the player quits.
         """
-        print("Welcome to BattleShipe Game!\n")
+        print("\nWelcome to BattleShipe Game!\n")
         print(f"{self.score()}\n")
 
         while True:
             print(
-                "\n\033[32mYour Board (showing your ships(@) and enemy's attacks(x)): \033[0m")
+                "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
             self.player_board.print_board(hide_ships=False)
-            print("\n\033[34mEnemy's board (showing your attacks only):\033[0m")
+            print("\nEnemy's board (showing your attacks only):")
             self.enemy_board.print_board(hide_ships=True)
 
             # Player's turn
-            print("\n\033[32mYour turn to attack!\033[0m")
+            print("\nYour turn to attack!\n")
             # Call the method of the class BattleshipGame and return a tuple(x,y) with the coordinates given by the player
             x, y = self.get_player_move()
             result = self.enemy_board.attack(x, y, "player")
 
             if result == "hit":
-                print("-----------------------------------------------------")
+
                 print(f"You Hit computer's ship at {({x}, {y})}")
                 if self.enemy_board.all_ships_sunk():
-                    print("-----------------------------------------------------")
+
                     print("You sank all the computer's ships! You win!")
                     break
             elif result == "miss":
-                print("-----------------------------------------------------")
+
                 print(f"You MISS computer's ship at the coordinate ({x},{y}).")
                 print("-----------------------------------------------------")
             else:
                 print("You have already tried this position.")
 
             # Computer's(Enemy) turn
-            print("\n\033[34mEnemy's turn!\033[0m")
+            print("\nEnemy's turn!\n")
             # Randomly choose the coordinates for the enemy by calling the methedo randint() from random library.
             cx = random.randint(0, BOARD_SIZE - 1)
             cy = random.randint(0, BOARD_SIZE - 1)
@@ -187,19 +185,26 @@ class BattleshipGame:
 
             if result == "hit":
                 print(f"The Enemy hits your ship at ({cx},{cy})!")
-                print("-----------------------------------------------------")
+
                 if self.player_board.all_ships_sunk():
                     print("The Enemy sank all your ships! You lose!")
                     print("-----------------------------------------------------")
                     break
             elif result == "miss":
+
                 print(
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
                 print("-----------------------------------------------------")
             # Ask if player wants to continue
-            continuar = input("\nDo you want to continue? (s/n): ").lower()
+            continuar = input(
+                "\nDo you want to continue (y/n) -> ").lower()
             if continuar == 'n':
                 print("You chose to quit the game. Goodbye!")
+                break
+            # Verify if the number of turns is greater than the total number of coordinates in the board. If so, It finish the game as a draw.
+            self.turns += 1
+            if self.turns > BOARD_SIZE * BOARD_SIZE:
+                print("It's a draw!")
                 break
 
 
