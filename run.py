@@ -16,16 +16,20 @@ while True:
 
 
 NUM_SHIPS = 3
-SCORES = {"player": 0, "computer": 0}
+
+SCORES = {"player": 0, "enemy": 0}
 
 class Board:
     """
     Represents a Battleship game board.
-
     """
 
     def __init__(self, size=BOARD_SIZE):
-        """Initialize the board with a given size and empty grid."""
+        """
+           Initialize the board with a given size and empty grid.
+           The board grid containing symbols for water (~), ships (@),
+           hits (X), and misses (O).
+        """
         self.size = size
         self.grid = [["~"] * size for _ in range(size)]
         self.ships = []
@@ -89,31 +93,33 @@ class Board:
 
 class BattleshipGame:
     """
-    Represents a Battleship game between a player and the computer.
+    Represents a Battleship game between a player and the computer(Enemy).
 
     Attributes:
         player_board (Board): The board containing the player's ships.
-        computer_board (Board): The board containing the computer's ships.
+        enemy_board (Board): The board containing the enemy's ships.
         turns (int): The number of turns taken in the game.
     """
     def __init__(self):
         """
-            Initialize three instances, self.player_board and self.computer_board calling function Board.
-            They create two boards and place ships for both player and computer. And one more instance 
-            self.turns = 0 to reset the number of turns taken in the game.
+            Initialize three instances. The instances self.player_board
+            and self.enemy create each one, new instances of Board class.
+            Board class create two boards and place ships for both player 
+            and enemy. And one more instance self.turns = 0 to reset the 
+            number of turns taken in the game.
         """
         self.player_board = Board()
-        self.computer_board = Board()
+        self.enemy_board = Board()
         self.turns = 0
 
         self.player_board.place_ships(NUM_SHIPS)
-        self.computer_board.place_ships(NUM_SHIPS)
+        self.enemy_board.place_ships(NUM_SHIPS)
 
     def score(self):
         """
-        Return f'string type with the update Player vs Computer score. 
+        Return f'string type with the update Player vs Enemy score. 
         """
-        return f"PLAYER SCORE {SCORES['player']}         COMPUTER SCORE {SCORES['computer']}"
+        return f"\033[32mPLAYER SCORE:\033[0m {SCORES['player']}         \033[34mENEMY SCORE:\033[0m {SCORES['enemy']}"
     
 
     def get_player_move(self):
@@ -135,15 +141,21 @@ class BattleshipGame:
             except ValueError:
                 print("Invalid input. Please enter numbers.")
 
-def play(self):
+    def play(self):
         """
-        Start and run the game loop until either the player or computer wins,
+        Start and run the game loop until either the player or computer(enemy) wins,
         or until the game ends in a draw or the player quits.
         """
+        print("Welcome to BattleShipe Game!\n")
+        print(f"{self.score()}\n")
 
-
-
-
+        while True:
+            print("\n\033[32mYour Board (showing your ships(@) and enemy's attacks(x)): \033[0m")
+            self.player_board.print_board(hide_ships=False)
+            print("\n\033[34mEnemy's board (showing your attacks only):\033[0m")
+            self.enemy_board.print_board(hide_ships=True)
+            def teste():print("oi")
+            break
 
 
 game = BattleshipGame()
