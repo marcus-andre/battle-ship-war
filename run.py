@@ -155,6 +155,7 @@ class BattleshipGame:
             # Shows how many turns left for the end of the match
             print(
                 f"            |Round {self.turns + 1} of {BOARD_SIZE * BOARD_SIZE}|")
+            print("                   ↓")
             print(f"{self.score()}\n")
             print(
                 "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
