@@ -37,6 +37,13 @@ If all possible moves are exhausted, the game ends in a **draw**.
  
  ![Board size feature](./images/size-feature.jpg) 
 
+- **You can choose to quit the game**  
+  - After each turn the user is asked if he wants to continue.
+  - If he chose "n", he breaks the loop and ends the game.  
+  - Although the live version this feature doesn't make much sense, playing on the terminal is useful for preventing you to kill the terminal if you need to use it while you are playing.
+ 
+ ![Choosing to continue to play feature](./images/continue-feature.jpg)
+
 - **Random Board Generation**  
   - Ships are randomly placed for both the player and computer.  
   - Player can see their ships but not the enemy’s.  
