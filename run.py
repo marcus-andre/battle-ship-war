@@ -164,7 +164,7 @@ class BattleshipGame:
 
             if result == "hit":
 
-                print(f"You Hit computer's ship at {({x}, {y})}")
+                print(f"You Hit computer's ship at ({x}, {y})")
                 if self.enemy_board.all_ships_sunk():
 
                     print("You sank all the computer's ships! You win!")
@@ -176,22 +176,21 @@ class BattleshipGame:
             else:
                 print("You have already tried this position.")
 
-            # Computer's(Enemy) turn
+           # Computer's (Enemy) turn
             print("\nEnemy's turn!\n")
-            # Randomly choose the coordinates for the enemy by calling the methedo randint() from random library.
-            cx = random.randint(0, BOARD_SIZE - 1)
-            cy = random.randint(0, BOARD_SIZE - 1)
-            enemy_result = self.player_board.attack(cx, cy, "enemy")
+            enemy_result = "repeat"
+            while enemy_result == "repeat":  # Loop até um ataque válido
+                cx = random.randint(0, BOARD_SIZE - 1)
+                cy = random.randint(0, BOARD_SIZE - 1)
+                enemy_result = self.player_board.attack(cx, cy, "enemy")
 
-            if result == "hit":
+            if enemy_result == "hit":
                 print(f"The Enemy hits your ship at ({cx},{cy})!")
-
                 if self.player_board.all_ships_sunk():
                     print("The Enemy sank all your ships! You lose!")
                     print("-----------------------------------------------------")
                     break
-            elif result == "miss":
-
+            elif enemy_result == "miss":
                 print(
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
                 print("-----------------------------------------------------")
