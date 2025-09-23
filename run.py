@@ -155,7 +155,6 @@ class BattleshipGame:
             # Shows how many turns left for the end of the match
             print(
                 f"            |Round {self.turns + 1} of {BOARD_SIZE * BOARD_SIZE}|")
-            print("                   ↓")
             print(f"{self.score()}\n")
             print(
                 "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
@@ -202,7 +201,7 @@ class BattleshipGame:
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
             # Ask if player wants to continue
             continuar = input(
-                "Do you want to continue (y/n) -> ").lower()
+                "Do you want to continue (y/n) -> \n").lower()
             if continuar == 'n':
                 print("You chose to quit the game. Goodbye!")
                 break
