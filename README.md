@@ -3,7 +3,11 @@
 Ultimate Battleships is a Python terminal game where the player competes against the computer (the enemy) to sink all of their battleships first.  
 The game runs entirely in the terminal and uses randomly generated boards for both the player and the computer. The user can try to beat the enemy's fleet by sinking all of their ships before the enemy sinks theirs. 
 
+[Play the game here](https://battleship-war-3e77d46f915d.herokuapp.com/)
+
 ---
+
+![Responsice Mockup](./images/mockup-image.jpg)
 
 ## How to play  
 
@@ -25,10 +29,19 @@ If all possible moves are exhausted, the game ends in a **draw**.
 
 ## Features  
 
-### Existing Features  
+### Existing Features
+
+- **You can choose the size of the board from 5-10**  
+  - Before the game starts, a question pops out asking the play to enter the size of the board.  
+  - This can enhance the games difficulty and gives it more complexity!
+ 
+ ![Board size feature](./images/size-feature.jpg) 
+
 - **Random Board Generation**  
   - Ships are randomly placed for both the player and computer.  
   - Player can see their ships but not the enemy’s.  
+
+![Ships randomly placed and visible](./images/visible-ships.jpg)
 
 - **Player vs Computer Gameplay**  
   - Turn-based gameplay where both sides attack each round.  
@@ -37,11 +50,15 @@ If all possible moves are exhausted, the game ends in a **draw**.
 - **Scoring System**  
   - Player and enemy scores are tracked throughout the game.  
   - The scoreboard is displayed at the start of each round.  
+  
+  ![Player atacking and score against the enemy](./images/player-attack.jpg)
 
 - **Input Validation & Error Handling**  
   - Prevents out-of-range coordinates.  
   - Prevents entering non-numeric values.  
-  - Prevents attacking the same square twice.  
+  - Prevents attacking the same square twice.
+
+  ![Coordinates validation](./images/coordinates-validation.jpg)  
 
 ---
 
@@ -82,9 +99,7 @@ The game was manually tested with:
 - Invalid inputs (letters instead of numbers, out-of-bounds coordinates, duplicate guesses).  
 - Multiple board sizes (5 to 10).  
 - Full games until win, loss, or draw.  
-- Verified that turns increment correctly and scores update properly.  
-
-Code was passed through a PEP8 linter to ensure consistent formatting.  
+- Verified that turns increment correctly and scores update properly.    
 
 ---
 
@@ -92,8 +107,7 @@ Code was passed through a PEP8 linter to ensure consistent formatting.
 
 ### Solved Bugs  
 - **ANSI code for color**:Originally I used the ANSI code for color, after researched how to do so, to make the terminal more stylish. I descovered later that this just runs in the terminal and can cause problems after deployed in Heroku. Fixed it by removing all the ANSI codes.  
-- **Repeated enemy guesses**: Computer sometimes was guessing repeated coordinates, which was given passing computer turns instead of guessing again. Fixed by adding a while loop for validation of the enemy's attacks and preventing repeated moves.  
-- **Draw condition**: Game would not end properly when all moves were used. Fixed with a turn counter.  
+- **Repeated enemy guesses**: Computer sometimes was guessing repeated coordinates, which was given passing computer turns instead of guessing again. Fixed by adding a while loop for validation of the enemy's attacks and preventing repeated moves.   
 
 ### Remaining Bugs  
 - None known.  

@@ -182,7 +182,7 @@ class BattleshipGame:
             else:
                 print("You have already tried this position.")
 
-           # Computer's (Enemy) turn
+            # Computer's (Enemy) turn
             print("\nEnemy's turn!\n")
             enemy_result = "repeat"
 
@@ -205,7 +205,8 @@ class BattleshipGame:
             if continuar == 'n':
                 print("You chose to quit the game. Goodbye!")
                 break
-            # Verify if the number of turns is greater than the total number of coordinates in the board. If so, It finish the game as a draw.
+            # Verify if the number of turns is greater than the total number of
+            # coordinates in the board. If so, It finish the game as a draw.
             self.turns += 1
             if self.turns > BOARD_SIZE * BOARD_SIZE:
                 print("It's a draw!")
