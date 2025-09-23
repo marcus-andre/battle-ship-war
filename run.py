@@ -4,7 +4,7 @@ import random
 
 
 while True:
-    print("\n-------------------------x-------------------------")
+    print("--------------------------------------------------")
     BOARD_SIZE = int(
         input("\nChose SIZE of the board (5-10)"))
 
