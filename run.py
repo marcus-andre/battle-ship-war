@@ -147,14 +147,17 @@ class BattleshipGame:
         or until the game ends in a draw or the player quits.
         """
         print("\nWelcome to BattleShipe Game!\n")
-        print(f"{self.score()}\n")
 
         while True:
+            # Shows how many turns left for the end of the match
+            print(
+                f"            |Round {self.turns + 1} of {BOARD_SIZE * BOARD_SIZE}|")
+            print(f"{self.score()}\n")
             print(
                 "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
             self.player_board.print_board(hide_ships=False)
             print("\nEnemy's board (showing your attacks only):")
-            self.enemy_board.print_board(hide_ships=True)
+            self.enemy_board.print_board(hide_ships=False)
 
             # Player's turn
             print("\nYour turn to attack!\n")
@@ -179,7 +182,8 @@ class BattleshipGame:
            # Computer's (Enemy) turn
             print("\nEnemy's turn!\n")
             enemy_result = "repeat"
-            while enemy_result == "repeat":  # Loop até um ataque válido
+
+            while enemy_result == "repeat":  # Loop until it has a valid attack
                 cx = random.randint(0, BOARD_SIZE - 1)
                 cy = random.randint(0, BOARD_SIZE - 1)
                 enemy_result = self.player_board.attack(cx, cy, "enemy")
