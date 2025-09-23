@@ -164,7 +164,8 @@ class BattleshipGame:
 
             # Player's turn
             print("\nYour turn to attack!\n")
-            # Call the method of the class BattleshipGame and return a tuple(x,y) with the coordinates given by the player
+            # Call the method of the class BattleshipGame and return a tuple(x,y)
+            #  with the coordinates given by the player
             x, y = self.get_player_move()
             result = self.enemy_board.attack(x, y, "player")
 
@@ -178,7 +179,6 @@ class BattleshipGame:
             elif result == "miss":
 
                 print(f"You MISS computer's ship at the coordinate ({x},{y}).")
-                print("-----------------------------------------------------")
             else:
                 print("You have already tried this position.")
 
@@ -195,12 +195,10 @@ class BattleshipGame:
                 print(f"The Enemy hits your ship at ({cx},{cy})!")
                 if self.player_board.all_ships_sunk():
                     print("The Enemy sank all your ships! You lose!")
-                    print("-----------------------------------------------------")
                     break
             elif enemy_result == "miss":
                 print(
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
-                print("-----------------------------------------------------")
             # Ask if player wants to continue
             continuar = input(
                 "\nDo you want to continue (y/n) -> ").lower()
