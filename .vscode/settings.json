@@ -4,5 +4,8 @@
     },
     "editor.defaultFormatter": "ms-python.autopep8",
     "python.terminal.useEnvFile": false,
-    "python.useEnvironmentsExtension": true
+    "python.useEnvironmentsExtension": true,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    }
 }

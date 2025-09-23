@@ -1,9 +1,10 @@
-# import module "random" from python library. This module provides functions to generate random numbers.
+# import module "random" from python library.
+# This module provides functions to generate random numbers.
 import random
 
 
 while True:
-    print("\n-----------------------------------------x-----------------------------------------x-----------------------------------------x--------------------------------------")
+    print("\n-------------------------x-------------------------")
     BOARD_SIZE = int(
         input("\nChose SIZE of the board (5-10)"))
 
@@ -52,8 +53,7 @@ class Board:
         """
         Print the board to the console.
 
-        Args:
-            hide_ships (bool): If True, hides ships ("@") when displaying the board.
+        hide_ships (bool): If True, hides ships ("@") when displaying the board
         """
         print("  " + " ".join(str(i) for i in range(self.size)))
         for idx, row in enumerate(self.grid):
@@ -66,7 +66,9 @@ class Board:
             print(str(idx) + " " + " ".join(display_row))
 
     def all_ships_sunk(self):
-        """Return True if all ships on this board have been sunk, otherwise False."""
+        """Return True if all ships on this board have been sunk,
+           otherwise False.
+        """
         return all(self.grid[i][j] != "@" for i, j in self.ships)
 
     def attack(self, x, y, players):
@@ -78,7 +80,8 @@ class Board:
             y (int): Column coordinate.
 
         Returns:
-            str: "hit" if a ship is hit, "miss" if water is hit, "repeat" if already attacked.
+            str: "hit" if a ship is hit, "miss" if water is hit,
+            "repeat" if already attacked.
         """
         if self.grid[x][y] == "@":
             self.grid[x][y] = "X"
@@ -157,7 +160,7 @@ class BattleshipGame:
                 "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
             self.player_board.print_board(hide_ships=False)
             print("\nEnemy's board (showing your attacks only):")
-            self.enemy_board.print_board(hide_ships=False)
+            self.enemy_board.print_board(hide_ships=True)
 
             # Player's turn
             print("\nYour turn to attack!\n")
