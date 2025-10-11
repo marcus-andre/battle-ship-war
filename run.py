@@ -180,7 +180,10 @@ class BattleshipGame:
 
                 print(f"You MISS computer's ship at the coordinate ({x},{y}).")
             else:
-                print("You have already tried this position.")
+                while result == "repeat":
+                    print("You have already tried this position.")
+                    x, y = self.get_player_move()
+                    result = self.enemy_board.attack(x, y, "player")
 
             # Computer's (Enemy) turn
             print("\nEnemy's turn!\n")
