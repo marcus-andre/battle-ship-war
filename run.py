@@ -2,21 +2,6 @@
 # This module provides functions to generate random numbers.
 import random
 
-
-while True:
-    print("--------------------------------------------------")
-    BOARD_SIZE = int(
-        input("\nChose SIZE of the board (5-10)"))
-
-    if 5 <= BOARD_SIZE <= 10:
-        print(
-            f"The SIZE of the Board is -> {BOARD_SIZE}")
-        break
-    else:
-        print(
-            "The SIZE of the board should be from: 5-10")
-
-
 NUM_SHIPS = 3
 
 SCORES = {"player": 0, "enemy": 0}
@@ -27,7 +12,7 @@ class Board:
     Represents a Battleship game board.
     """
 
-    def __init__(self, size=BOARD_SIZE):
+    def __init__(self, size):
         """
            Initialize the board with a given size and empty grid.
            The board grid containing symbols for water (~), ships (@),
@@ -104,7 +89,7 @@ class BattleshipGame:
         turns (int): The number of turns taken in the game.
     """
 
-    def __init__(self):
+    def __init__(self, board_size):
         """
             Initialize three instances. The instances self.player_board
             and self.enemy create each one, new instances of Board class.
@@ -112,8 +97,9 @@ class BattleshipGame:
             and enemy. And one more instance self.turns = 0 to reset the
             number of turns taken in the game.
         """
-        self.player_board = Board()
-        self.enemy_board = Board()
+        self.board_size = board_size
+        self.player_board = Board(board_size)
+        self.enemy_board = Board(board_size)
         self.turns = 0
 
         self.player_board.place_ships(NUM_SHIPS)
@@ -134,10 +120,12 @@ class BattleshipGame:
         """
         while True:
             try:
-                x = int(input(f"Enter row (0-{BOARD_SIZE - 1}): "))
+                x = int(
+                    input(f"Enter row (0-{self.board_size - 1}): ").strip())
 
-                y = int(input(f"Enter column (0-{BOARD_SIZE - 1}): "))
-                if 0 <= x < BOARD_SIZE and 0 <= y < BOARD_SIZE:
+                y = int(
+                    input(f"Enter column (0-{self.board_size - 1}): ").strip())
+                if 0 <= x < self.board_size and 0 <= y < self.board_size:
                     return x, y
                 else:
                     print("Coordinates out of bounds. Try again.")
@@ -154,7 +142,7 @@ class BattleshipGame:
         while True:
             # Shows how many turns left for the end of the match
             print(
-                f"            |Round {self.turns + 1} of {BOARD_SIZE * BOARD_SIZE}|")
+                f"            |Round {self.turns + 1} of {self.board_size * self.board_size}|")
             print(f"{self.score()}\n")
             print(
                 "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
@@ -169,29 +157,26 @@ class BattleshipGame:
             x, y = self.get_player_move()
             result = self.enemy_board.attack(x, y, "player")
 
+            while result == "repeat":
+                print("You have already tried this position.")
+                x, y = self.get_player_move()
+                result = self.enemy_board.attack(x, y, "player")
             if result == "hit":
-
                 print(f"You Hit computer's ship at ({x}, {y})")
                 if self.enemy_board.all_ships_sunk():
-
                     print("You sank all the computer's ships! You win!")
                     break
             elif result == "miss":
-
-                print(f"You MISS computer's ship at the coordinate ({x},{y}).")
-            else:
-                while result == "repeat":
-                    print("You have already tried this position.")
-                    x, y = self.get_player_move()
-                    result = self.enemy_board.attack(x, y, "player")
+                print(
+                    f"You MISS computer's ship at the coordinate ({x},{y}).")
 
             # Computer's (Enemy) turn
             print("\nEnemy's turn!\n")
             enemy_result = "repeat"
 
             while enemy_result == "repeat":  # Loop until it has a valid attack
-                cx = random.randint(0, BOARD_SIZE - 1)
-                cy = random.randint(0, BOARD_SIZE - 1)
+                cx = random.randint(0, self.board_size - 1)
+                cy = random.randint(0, self.board_size - 1)
                 enemy_result = self.player_board.attack(cx, cy, "enemy")
 
             if enemy_result == "hit":
@@ -204,17 +189,36 @@ class BattleshipGame:
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
             # Ask if player wants to continue
             continuar = input(
-                "Do you want to continue (y/n) -> \n").lower()
-            if continuar == 'n':
+                "Do you want to continue?"
+                "\nPres (any) key to continue with the game or (Q) to quit: ").lower().strip()
+            if continuar == 'q':
                 print("You chose to quit the game. Goodbye!")
                 break
             # Verify if the number of turns is greater than the total number of
             # coordinates in the board. If so, It finish the game as a draw.
             self.turns += 1
-            if self.turns > BOARD_SIZE * BOARD_SIZE:
+            if self.turns > self.board_size * self.board_size:
                 print("It's a draw!")
                 break
 
 
-game = BattleshipGame()
+while True:
+    try:
+        print("--------------------------------------------------")
+        board_size = int(
+            input("\nChose SIZE of the board (5-10)").strip())
+
+        if 5 <= board_size <= 10:
+            print(
+                f"The SIZE of the Board is -> {board_size}")
+            break
+
+        else:
+            print(
+                "The SIZE of the board should be from: 5-10")
+    except ValueError:
+        print("Invalid input. Please enter just numbers.")
+
+
+game = BattleshipGame(board_size)
 game.play()
