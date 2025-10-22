@@ -109,22 +109,24 @@ class BattleshipGame:
         """
         Return f'string type with the update Player vs Enemy score.
         """
-        return f"PLAYER SCORE: {SCORES['player']}         ENEMY SCORE: {SCORES['enemy']}"
+        return f"PLAYER SCORE: {SCORES['player']}         "
+        "ENEMY SCORE: {SCORES['enemy']}"
 
     def get_player_move(self):
         """
         Prompt the player to enter attack coordinates.
 
         Returns:
-            tuple[int, int]: A valid (row, column) coordinate entered by the player.
+            tuple[int, int]: A valid (row, column) coordinate
+            entered by the player.
         """
         while True:
             try:
                 x = int(
-                    input(f"Enter row (0-{self.board_size - 1}): ").strip())
+                    input(f"Enter row (0-{self.board_size - 1}):\n").strip())
 
                 y = int(
-                    input(f"Enter column (0-{self.board_size - 1}): ").strip())
+                    input(f"Enter column (0-{self.board_size-1}):\n").strip())
                 if 0 <= x < self.board_size and 0 <= y < self.board_size:
                     return x, y
                 else:
@@ -134,15 +136,16 @@ class BattleshipGame:
 
     def play(self):
         """
-        Start and run the game loop until either the player or computer(enemy) wins,
-        or until the game ends in a draw or the player quits.
+        Start and run the game loop until either the player or computer (enemy)
+        wins, or until the game ends in a draw or the player quits.
         """
         print("\nWelcome to BattleShipe Game!\n")
 
         while True:
             # Shows how many turns left for the end of the match
             print(
-                f"            |Round {self.turns + 1} of {self.board_size * self.board_size}|")
+                f"            |Round {self.turns + 1} of"
+                f" {self.board_size * self.board_size}|")
             print(f"{self.score()}\n")
             print(
                 "\nYour Board (showing your ships(@) and enemy's attacks(x)):")
@@ -152,8 +155,8 @@ class BattleshipGame:
 
             # Player's turn
             print("\nYour turn to attack!\n")
-            # Call the method of the class BattleshipGame and return a tuple(x,y)
-            #  with the coordinates given by the player
+            # Call the method of the class BattleshipGame and return a
+            # tuple(x,y) with the coordinates given by the player
             x, y = self.get_player_move()
             result = self.enemy_board.attack(x, y, "player")
 
@@ -190,7 +193,8 @@ class BattleshipGame:
             # Ask if player wants to continue
             continuar = input(
                 "Do you want to continue?"
-                "\nPres (any) key to continue with the game or (Q) to quit: ").lower().strip()
+                "\nPres (any) key to continue with the game"
+                "or (Q) to quit: \n").lower().strip()
             if continuar == 'q':
                 print("You chose to quit the game. Goodbye!")
                 break
@@ -206,7 +210,7 @@ while True:
     try:
         print("--------------------------------------------------")
         board_size = int(
-            input("\nChose SIZE of the board (5-10)").strip())
+            input("\nChose SIZE of the board (5-10)\n").strip())
 
         if 5 <= board_size <= 10:
             print(

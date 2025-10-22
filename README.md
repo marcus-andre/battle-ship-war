@@ -110,10 +110,32 @@ The game was manually tested with:
 
 ---
 
+## Deployment
+This game was developed locally using VS Code, and all commits were pushed to Heroku using Git. A Mock Terminal for Heroku was used for live access through the browser, which was provided by Code Institute. In order to get the application ready for deployment I followed the next steps:
+1. Open the [template repository](https://github.com/Code-Institute-Org/p3-template) on GitHub provided by Code institute.
+2. Click the green "Use this template" button at the top righ, and select "Create a new repository" to clone the repository.
+3. With the repository you just create, copy the url on the green <> Code button in the upper right corner.
+4. Open **VS Code** with **Terminal** > **New Terminal**.
+5. In the terminal, `run git clone https://github.com/marcus-andre/battleship-game.git .` 
+6. On the terminal window using the command `pip3 freeze > requirements.txt` the installed `requirements.txt` file, which contains a list of items to be installed, defining the modules imported to Heroku.
+7. Create a [Heroku](https://www.heroku.com/) account.
+8. Created the app in Heroku.
+9. Went to the Settings tab in Heroku and clicked on the Reveal Config Vars button
+10. on reveial config vars add `Key:PORT` with `Value:8000`.
+11. Still on setting tab, went to Add Buildpack and selec Python and Nodejs.
+12. Make sure Python is on top and Nodejs is at bottom.
+13. Choose the Deployment method Github at the Deploy section.
+14. Click `Connect to Github` button.
+15. Then manually deploy clicking on `deploy branch` button.
+16. The live link will appear on a `view` button when the deployment process finish.
+
+---
+
 ## Bugs  
 
 ### Solved Bugs  
-- **ANSI code for color**:Originally I used the ANSI code for color, after researched how to do so, to make the terminal more stylish. I descovered later that this just runs in the terminal and can cause problems after deployed in Heroku. Fixed it by removing all the ANSI codes.  
+- **ANSI code for color**:Originally I used the ANSI code for color, after researched how to do so, to make the terminal more stylish. I descovered later that this just runs in the terminal and can cause problems after deployed in Heroku. Fixed it by removing all the ANSI codes.
+- **Player attack inputs validation**: When player choose the same coordinates, the program wasnt wasking for new coordinates. It was skipping to the computer's turn. Fixed by add a while loop to keep asking for different coordinates as long as the same coordinates are chosen.
 - **Repeated enemy guesses**: Computer sometimes was guessing repeated coordinates, which was given passing computer turns instead of guessing again. Fixed by adding a while loop for validation of the enemy's attacks and preventing repeated moves.   
 
 ### Remaining Bugs  
