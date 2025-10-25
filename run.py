@@ -174,7 +174,7 @@ class BattleshipGame:
                     f"You MISS computer's ship at the coordinate ({x},{y}).")
 
             # Computer's (Enemy) turn
-            print("\nEnemy's turn!\n")
+            print("\nEnemy's turn!")
             enemy_result = "repeat"
 
             while enemy_result == "repeat":  # Loop until it has a valid attack
@@ -192,7 +192,7 @@ class BattleshipGame:
                     f"The Enemy MISS your ship at the coordinate ({cx},{cy}).")
             # Ask if player wants to continue
             continuar = input(
-                "Do you want to continue?"
+                "\nDo you want to continue?"
                 "\nPres (any) key to continue with the game"
                 "or (Q) to quit: \n").lower().strip()
             if continuar == 'q':
