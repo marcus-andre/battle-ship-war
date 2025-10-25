@@ -194,7 +194,7 @@ class BattleshipGame:
             continuar = input(
                 "\nDo you want to continue?"
                 "\nPres (any) key to continue with the game"
-                "or (Q) to quit: \n").lower().strip()
+                " or (Q) to quit: \n").lower().strip()
             if continuar == 'q':
                 print("You chose to quit the game. Goodbye!")
                 break
